@@ -2,7 +2,7 @@
 
 Набор промтов, правил и чек-листов, который проводит от «есть идея продукта» до черновика лендинга, подготовленного к живой браузерной проверке и деплою. Полный режим работает в Claude Code как набор скиллов. Оркестратор можно использовать в Claude, ChatGPT, Gemini или Perplexity, но возможности веб-поиска, файлов и визуальной проверки зависят от платформы и тарифа.
 
-> **EN summary.** A research-first landing-page pipeline for LLM agents: discovery → verifiable review synthesis → clearly labeled segment hypotheses across four questions → copy brief → design direction from a real style database → landing generation → SEO/GEO, mobile, PageSpeed, and optional single-file multilingual. Step prompts are in Russian; the orchestrator exists in both languages (`00-orchestrator/ORCHESTRATOR-EN.md`).
+> **EN summary.** A research-first landing-page pipeline for LLM agents: discovery → verifiable review synthesis → clearly labeled synthetic hypotheses from 10 simulated personas and a critic pass → copy brief → design direction from a real style database → landing generation → SEO/GEO, mobile, PageSpeed, and optional single-file multilingual. Step prompts are in Russian; the orchestrator exists in both languages (`00-orchestrator/ORCHESTRATOR-EN.md`).
 
 ---
 
@@ -23,8 +23,8 @@
                  │
                  ▼
 Шаг 3  Синтетический кастдев ────── custdev-synthesis.md
-       сегменты + 4 вопроса: workflow и боль / существующие решения /
-       желаемое решение и готовность платить / где ищут такой софт
+       10 персон на языке живых отзывов, интервью о прошлом выборе,
+       второй проход критиком, топ-5 болей и барьеров, мотивы
                  │
                  ▼
 Шаг 4  Copy Brief ───────────────── copy-brief.md
@@ -86,7 +86,7 @@ cd landing-pipeline
 | `00-orchestrator/` | Единый промт-дирижёр RU и EN: роли, правила поведения, паузы, формат артефактов |
 | `01-discovery/` | Шаг 1 — 8 вопросов discovery, обработка существующего сайта, допущения |
 | `02-reviews-parser/` | Шаг 2 — где искать отзывы, как извлекать проверяемые сигналы и дословный vocabulary, как честно описывать покрытие |
-| `03-synthetic-custdev/` | Шаг 3 — синтетический кастдев в объёме вебинара: сегменты и четыре вопроса протокола, только как гипотезы для проверки |
+| `03-synthetic-custdev/` | Шаг 3 — упрощённый синтетический кастдев: 10 персон, интервью, проход критиком, синтез для лендинга |
 | `04-copy-brief/` | Шаг 4 — Copy Brief на ~800 слов, выбор primary сегмента/барьера/мотива, фильтр AI-штампов |
 | `05-design/` | Шаг 5 — выбор контрастных направлений и дизайн-системы; `data/` — база стилей, палитр, шрифтов и паттернов (MIT, UI/UX Pro Max); `reference-library.md` — как уйти от «дефолтного AI-вида» через эталоны реальных продуктов |
 | `06-landing-generation/` | Шаг 6 + 7a–c — сборка, стек, SEO/GEO, мобильная версия, PageSpeed; `LANDING-RULES.md` — свод правил и pre-flight чек-лист; `PITFALLS.md` — грабли с живых лендингов |
@@ -107,7 +107,7 @@ cd landing-pipeline
 ## Принципы, встроенные во все блоки
 
 - **Сначала данные, потом тексты.** Копирайт строится на проверяемых цитатах из живых отзывов. Синтетические интервью дают только гипотезы и никогда не используются как отзывы, доказательства или якобы реальные customer quotes.
-- **Синтетика ограничена.** Каждый файл кастдева начинается с плашки «это гипотезы для проверки». Протокол не расширяется за пределы четырёх вопросов из вебинара.
+- **Синтетика помечается.** Каждый файл кастдева начинается с плашки «это симуляция, проверять живыми интервью». Персоны говорят языком отзывов, двое из десяти не покупают, второй проход вычищает лесть.
 - **Никаких выдумок.** Нет данных — ставится `[FILL: …]` с инструкцией, что подставить. Стиль не из базы — помечается `[без базы]`.
 - **Anti-AI-slop.** Запрещённые фразы, эмодзи, стоковые градиенты и «три колонки везде» вычищаются на уровне правил.
 - **Hero отвечает на главный барьер.** H1 — формула «результат + несмотря на барьер», 5–10 слов.

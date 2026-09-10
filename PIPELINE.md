@@ -6,7 +6,7 @@
 
 | Роль | Шаги | За что отвечает |
 |---|---|---|
-| Research Director | 0, 1, 2, 3 | Данные о продукте, проверяемые голоса рынка и явно помеченные гипотезы по сегментам |
+| Research Director | 0, 1, 2, 3 | Данные о продукте, голоса рынка из отзывов, 10 персон и интервью с ними |
 | Copy Lead | 4 | Copy Brief: Hero, тон голоса, value props, возражения, CTA |
 | Design Director | 5 | Контрастные дизайн-направления из базы, hero-макеты, design-tokens |
 | Landing Generator | 6 | Landing pattern, стек, код лендинга, legal-документы |
@@ -19,7 +19,7 @@
 | **0. Ресерч идеи** (опционально) | Идея продукта, 1–3 предположения о сегментах | Вердикт GO / NARROW / PIVOT, кандидаты в сегменты | — (внешние скиллы) | NMT-скиллы `nmt-market-research`, `nmt-craft-value-proposition` (см. TOOLS.md) |
 | **1. Discovery intake** | Ответы на 8 вопросов одним сообщением | `01-discovery/discovery-brief.md`, при наличии старого сайта — `existing-design-extraction.md` | `01-discovery/` | — |
 | **2. Парсинг отзывов** | Конкуренты и ниша из шага 1 | `02-reviews/reviews-synthesis.md`: проверяемые сигналы, цитаты, покрытие и ограничения | `02-reviews-parser/` | Веб-поиск и чтение страниц: G2, Capterra, Product Hunt, Reddit, App Store / Google Play, Trustpilot, Amazon, комментарии YouTube |
-| **3. Синтетический кастдев** | Шаг 1 + шаг 2 | `03-custdev/custdev-synthesis.md`: гипотезы по четырём вопросам протокола и статус проверки | `03-synthetic-custdev/` | — |
+| **3. Синтетический кастдев** | Шаг 1 + шаг 2 | `03-custdev/custdev-synthesis.md` (~1500 слов), по запросу `custdev-transcript-NN.md` по персоне | `03-synthetic-custdev/` | — |
 | **4. Copy Brief** | Шаги 1–3 | `04-copy/copy-brief.md` (~800 слов) | `04-copy-brief/` | Опционально: `copywriting`, `page-cro` из marketingskills |
 | **5. Выбор дизайна** | Шаги 1, 3, 4 + база `05-design/data/*.csv` | `05-design/hero-v1..N.html`, `design-tokens.json`, `component-library.md` | `05-design/` | Refero, React Bits, Aceternity, Fancy Components; полный скилл UI/UX Pro Max |
 | **6. Сборка лендинга** | Шаги 1–5 | `06-landing/landing.html` (или scaffold Next.js / Astro), `images/`, `privacy.html`, `terms.html`, `cookies.html`, `stack-choice-rationale.md` | `06-landing-generation/` + `LANDING-RULES.md` | squoosh.app для WebP; Google Apps Script для форм (`DEPLOY.md`) |
@@ -31,8 +31,9 @@
 
 ## Что решено и не обсуждается внутри пайплайна
 
-- **Синтетический кастдев ограничен объёмом вебинара:** сегменты и четыре вопроса — workflow и боль, существующие решения, желаемое решение и готовность платить, где ищут такой софт. Дополнительные блоки не добавляются.
+- **10 персон** на шаге 3, двое не купили. Интервью — о прошлом поведении, затем отдельный проход критиком. Повторяемость внутри симуляции — способ приоритизировать гипотезы, а не рыночная частота.
 - **Парсинг отзывов — best-effort по доступным источникам.** Пайплайн фиксирует покрытие и пробелы и не называет выборку насыщенной, стабильной или репрезентативной.
+- **Пользователь видит синтез** шага 3. Транскрипты — только по запросу, по файлу на персону, с предупреждением о расходе контекста.
 - **Primary сегмент выбирает пользователь**, модель обосновывает primary барьер и мотив.
 - **Стили только из базы.** В Claude Code модель читает `05-design/data/*.csv`; в чате просит прикрепить их. Выбор без базы помечается `[без базы]`.
 - **Количество hero-вариантов выбирает пользователь**: 1, 3 или 5. Контрастность по трём осям: температура / энергия / эпоха.
@@ -46,7 +47,7 @@
 ## Как блоки связаны данными
 
 ```
-discovery-brief ──┬──► reviews-synthesis ──► custdev-hypotheses ──► copy-brief ──┬──► hero-variants ──► design-tokens
+discovery-brief ──┬──► reviews-synthesis ──► custdev-synthesis ──► copy-brief ──┬──► hero-variants ──► design-tokens
                   │                                                             │
                   └─────────────────────────────────────────────────────────────┴──► landing.html ──► seo/mobile patches ──► pagespeed ──► multilingual
 ```

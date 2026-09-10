@@ -12,7 +12,7 @@
 **Входные данные:**
 - Discovery Brief (Шаг 1) — тип продукта, регион (legal-требования), язык, стек
 - Reviews Synthesis (Шаг 2) — опц.
-- Custdev Synthesis (Шаг 3) — гипотезы по четырём вопросам и статус их проверки
+- Custdev Synthesis (Шаг 3) — primary сегмент, барьеры и мотивы из 10 симулированных персон; всё остаётся явно помеченными гипотезами
 - Copy Brief (Шаг 4) — финальный копирайт
 - Design choice (Шаг 5) — `design-tokens.json` + `component-library.md` + выбранный стиль
 
@@ -163,7 +163,7 @@ Council **сам генерирует legal-документы** (`privacy.html`
 
 ### 2.2 Что делает Council
 
-**Keyword research:** 1 primary keyword + 3-5 long-tail. Source — Discovery Brief (тип продукта, регион, язык) + проверяемые мотивы и vocabulary из Reviews Synthesis + явно помеченные гипотезы Custdev Synthesis.
+**Keyword research:** 1 primary keyword + 3-5 long-tail. Source — Discovery Brief (тип продукта, регион, язык) + vocabulary из Reviews Synthesis + явно помеченные мотивы-гипотезы из Custdev Synthesis.
 
 **Meta tags:**
 - `<title>` — 55-60 символов, содержит primary keyword, не перегружен
