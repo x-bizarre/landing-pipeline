@@ -1,0 +1,14 @@
+.DS_Store
+node_modules/
+*.log
+.env
+.env.*
+!.env.example
+.vercel/
+.claude/settings.local.json
+.idea/
+.vscode/
+credentials*.json
+service-account*.json
+*.pem
+*.p12
